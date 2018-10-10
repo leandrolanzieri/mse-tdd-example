@@ -85,8 +85,21 @@ void testSendShouldFailWhenNotJoined(void)
     char msg[] = { 0x12, 0x34, 0x56, 0x78 };
     size_t msgSize = 4;
 
-    rn2903Lorawan_IsJoined_IgnoreAndReturn(false);
+    rn2903Lorawan_IsJoined_ExpectAndReturn(false);
 
     res = lorawan_Send(msg, msgSize);
     TEST_ASSERT_EQUAL(LORAWAN_SEND_ERR_NOT_JOINED, res);
+}
+
+void testSendShouldFailWhenDeviceBusy(void)
+{
+    lorawan_send_result_t res;
+    char msg[] = { 0x12, 0x34, 0x56, 0x78 };
+    size_t msgSize = 4;
+
+    rn2903Lorawan_IsJoined_ExpectAndReturn(true);
+    rn2903Lorawan_IsBusy_ExpectAndReturn(true);
+
+    res = lorawan_Send(msg, msgSize);
+    TEST_ASSERT_EQUAL(LORAWAN_SEND_ERR_BUSY, res);
 }
