@@ -27,6 +27,7 @@ typedef enum {
 typedef enum {
     LORAWAN_SEND_ERR_NOT_JOINED,
     LORAWAN_SEND_ERR_BUSY,
+    LORAWAN_SEND_ERR_DEVICE_FAILED,
     LORAWAN_SEND_SUCCESS
 } lorawan_send_result_t;
 

@@ -2,6 +2,7 @@
 #define RN2903_LORAWAN_H_
 
 #include <stdbool.h>
+#include <stdlib.h>
 #include "lorawan.h"
 
 /**
@@ -55,5 +56,15 @@ bool rn2903Lorawan_IsJoined(void);
  * @return false Device not busy
  */
 bool rn2903Lorawan_IsBusy(void);
+
+/**
+ * @brief Attepmts to send a payload
+ * 
+ * @param[in] msg Buffer with payload
+ * @param[in] msgSize Size of payload buffer
+ * @return true Payload sent
+ * @return false Payload not sent
+ */
+bool rn2903Lorawan_Send(char *msg, size_t msgSize);
 
 #endif

@@ -29,4 +29,10 @@ lorawan_send_result_t lorawan_Send(char *msg, size_t msgSize)
     if (rn2903Lorawan_IsBusy()) {
         return LORAWAN_SEND_ERR_BUSY;
     }
+
+    if (rn2903Lorawan_Send(msg, msgSize)) {
+        return LORAWAN_SEND_SUCCESS;
+    } else {
+        return LORAWAN_SEND_ERR_DEVICE_FAILED;
+    }
 }
