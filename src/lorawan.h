@@ -1,6 +1,8 @@
 #ifndef LORAWAN_H_
 #define LORAWAN_H_
 
+#include <stdlib.h>
+
 typedef struct {
     char *appkey;  /*< Application Key */
     char *appeui;  /*< Application EUI */
@@ -22,6 +24,12 @@ typedef enum {
     LORAWAN_JOIN_ABP
 } lorawan_join_mode_t;
 
+typedef enum {
+    LORAWAN_SEND_ERR_NOT_JOINED,
+    LORAWAN_SEND_ERR_BUSY,
+    LORAWAN_SEND_SUCCESS
+} lorawan_send_result_t;
+
 /**
  * @brief Attempts to join the LoRaWAN network
  * 
@@ -31,5 +39,14 @@ typedef enum {
  */
 lorawan_join_result_t lorawan_Join(lorawan_keys_t keys,
                                    lorawan_join_mode_t mode);
+
+/**
+ * @brief Attempts to send a message
+ * 
+ * @param[in] msg Buffer with the message
+ * @param[in] msgSize Size of the buffer
+ * @return lorawan_send_result_t 
+ */
+lorawan_send_result_t lorawan_Send(char* msg, size_t msgSize);
 
 #endif

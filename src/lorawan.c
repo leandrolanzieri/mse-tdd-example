@@ -19,3 +19,10 @@ lorawan_join_result_t lorawan_Join(lorawan_keys_t keys,
     return rn2903Lorawan_Join(mode) ?
             LORAWAN_JOIN_SUCCESS : LORAWAN_JOIN_ERR_TIMEOUT;
 }
+
+lorawan_send_result_t lorawan_Send(char *msg, size_t msgSize)
+{
+    if (!rn2903Lorawan_IsJoined()) {
+        return LORAWAN_SEND_ERR_NOT_JOINED;
+    }
+}

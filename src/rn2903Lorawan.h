@@ -40,4 +40,12 @@ bool rn2903Lorawan_SetDevEui(char *deveui);
  */
 bool rn2903Lorawan_Join(lorawan_join_mode_t mode);
 
+/**
+ * @brief Checks if the device has joined the network
+ * 
+ * @return true Device joined
+ * @return false Device not joined
+ */
+bool rn2903Lorawan_IsJoined(void);
+
 #endif
