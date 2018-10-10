@@ -48,4 +48,12 @@ bool rn2903Lorawan_Join(lorawan_join_mode_t mode);
  */
 bool rn2903Lorawan_IsJoined(void);
 
+/**
+ * @brief Checks if the device is busy
+ * 
+ * @return true Device busy
+ * @return false Device not busy
+ */
+bool rn2903Lorawan_IsBusy(void);
+
 #endif

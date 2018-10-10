@@ -25,4 +25,8 @@ lorawan_send_result_t lorawan_Send(char *msg, size_t msgSize)
     if (!rn2903Lorawan_IsJoined()) {
         return LORAWAN_SEND_ERR_NOT_JOINED;
     }
+
+    if (rn2903Lorawan_IsBusy()) {
+        return LORAWAN_SEND_ERR_BUSY;
+    }
 }
