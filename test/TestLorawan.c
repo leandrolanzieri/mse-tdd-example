@@ -56,3 +56,37 @@ void testJoinShouldFailWhenTimeout(void)
     res = lorawan_Join(keys, mode);
     TEST_ASSERT_EQUAL(LORAWAN_JOIN_ERR_TIMEOUT, res);
 }
+
+void testJoinShouldSuccessUpponValidKeysAndNoTimeout(void)
+{
+    char appkey[] = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+    char appeui[] = "BBBBBBBBBBBBBBBB";
+    char deveui[] = "CCCCCCCCCCCCCCCC";
+    lorawan_keys_t keys = {
+        .appkey = appkey,
+        .appeui = appeui,
+        .deveui = deveui
+    };
+    lorawan_join_result_t res;
+    lorawan_join_mode_t mode = LORAWAN_JOIN_OTAA;
+
+    rn2903Lorawan_SetAppKey_ExpectAndReturn(appkey, true);
+    rn2903Lorawan_SetAppEui_ExpectAndReturn(appeui, true);
+    rn2903Lorawan_SetDevEui_ExpectAndReturn(deveui, true);
+    rn2903Lorawan_Join_ExpectAndReturn(mode, true);
+
+    res = lorawan_Join(keys, mode);
+    TEST_ASSERT_EQUAL(LORAWAN_JOIN_SUCCESS, res);
+}
+
+void testSendShouldFailWhenNotJoined(void)
+{
+    lorawan_send_result_t res;
+    char msg[] = { 0x12, 0x34, 0x56, 0x78 };
+    size_t msgSize = 4;
+
+    rn2903Lorawan_IsJoined_IgnoreAndReturn(false);
+
+    res = lorawan_Send(msg, msgSize);
+    TEST_ASSERT_EQUAL(LORAWAN_SEND_ERR_NOT_JOINED, res);
+}
