@@ -1,13 +1,11 @@
 #include "report.h"
 #include "lorawan.h"
 
-#include <stdio.h>
-
 static void _int_to_bytes(char *buffer, int32_t value,
                                        size_t byteSize)
 {
     for (int i = 0; i < byteSize; i++) {
-        buffer[i] = (int)(value >> (i * 8));
+        buffer[i] = (char)(value >> (i * 8));
     }
 }
 

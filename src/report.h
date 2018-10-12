@@ -16,7 +16,7 @@
 #define REPORT_IDX_CONTAINER    (0)
 #define REPORT_IDX_BATTERY      (1)
 #define REPORT_IDX_GPS_LAT      (2)
-#define REPORT_IDX_GPS_LNG      (5)
+#define REPORT_IDX_GPS_LNG      (6)
 #define REPORT_IDX_GPS_NO_FIX   (2)
 
 #define REPORT_MAX_CONTAINER    (100)
@@ -38,6 +38,14 @@ typedef enum {
     REPORT_SEND_ERR_LORA
 } report_send_result_t;
 
+/**
+ * @brief Sends a report via LoRa.
+ * 
+ * @param[in] container State of the container
+ * @param[in] battery State of the battery
+ * @param[in] gps GPS data
+ * @return report_send_result_t 
+ */
 report_send_result_t report_Send(container_state_t container,
                                  battery_state_t battery,
                                  gps_coordinates_t *gps);
