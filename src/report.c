@@ -19,6 +19,11 @@ report_send_result_t report_Send(container_state_t container,
     size_t size = 0;
     int32_t lat, lng;
 
+    /* check if container value is within limits */
+    if (container > REPORT_MAX_CONTAINER) {
+        return REPORT_SEND_ERR_BAD_VALUE;
+    }
+
     payload[REPORT_IDX_CONTAINER] = (char)container;
     size += REPORT_SIZE_CONTAINER;
 

@@ -19,6 +19,8 @@
 #define REPORT_IDX_GPS_LNG      (5)
 #define REPORT_IDX_GPS_NO_FIX   (2)
 
+#define REPORT_MAX_CONTAINER    (100)
+
 typedef uint8_t container_state_t;
 
 typedef uint8_t battery_state_t;
