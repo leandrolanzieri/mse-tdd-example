@@ -27,6 +27,10 @@ report_send_result_t report_Send(container_state_t container,
     payload[REPORT_IDX_CONTAINER] = (char)container;
     size += REPORT_SIZE_CONTAINER;
 
+    if (battery > REPORT_MAX_BATTERY) {
+        return REPORT_SEND_ERR_BAD_VALUE;
+    }
+
     payload[REPORT_IDX_BATTERY] = (char)battery;
     size += REPORT_SIZE_BATTERY;
 
@@ -40,8 +44,6 @@ report_send_result_t report_Send(container_state_t container,
         _int_to_bytes(&(payload[REPORT_IDX_GPS_LNG]), lng, REPORT_SIZE_LNG);
         size += REPORT_SIZE_LNG;
     }
-
-    printf("container: %d", payload[0]);
 
     return lorawan_Send(payload, size) == LORAWAN_SEND_SUCCESS ? 
                 REPORT_SEND_SUCCESS : REPORT_SEND_ERR_LORA;
