@@ -47,3 +47,20 @@ void testSendShouldSendValuesAndNotGPS(void)
     res = report_Send(container, battery, &gps);
     TEST_ASSERT_EQUAL(REPORT_SEND_SUCCESS, res);
 }
+
+void testSendShouldNotSendWrongContainer(void)
+{
+    container_state_t container = TEST_CONTAINER_WRONG;
+    battery_state_t battery = TEST_BATTERY_FULL;
+    gps_coordinates_t gps = {
+        .lat = TEST_GPS_LAT,
+        .lng = TEST_GPS_LNG,
+        .fixed = TEST_GPS_FIX
+    };
+    report_send_result_t res;
+
+    /* Note that lorawan_Send is expected to be called 0 times */
+
+    res = report_Send(container, battery, &gps);
+    TEST_ASSERT_EQUAL(REPORT_SEND_ERR_BAD_VALUE, res);
+}
