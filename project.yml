@@ -43,8 +43,12 @@
 :cmock:
   :when_no_prototypes: :warn
   :enforce_strict_ordering: TRUE
+  :callback_after_arg_check: TRUE
   :plugins:
     - :ignore
+    - :array
+    - :callback
+    - :expect_any_args
   :treat_as:
     uint8:    HEX8
     uint16:   HEX16
